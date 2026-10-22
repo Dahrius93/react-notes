@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+/* Dark mode driven by a `.dark` class on <html> (see useDarkMode) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Indeterminate progress bar (navigation loading) */
+@keyframes progress {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth bg-white text-zinc-800 antialiased dark:bg-zinc-950 dark:text-zinc-200;
+  }
+
+  /* Keep anchored sections clear of the sticky header */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* Typography for the explanatory text of each note page */
+@layer components {
+  .prose-notes {
+    @apply leading-7 text-zinc-700 dark:text-zinc-300;
+  }
+  .prose-notes > * + * {
+    @apply mt-4;
+  }
+  .prose-notes h3 {
+    @apply mt-8 text-lg font-semibold text-zinc-900 dark:text-zinc-100;
+  }
+  .prose-notes ul {
+    @apply list-disc space-y-1 pl-6;
+  }
+  .prose-notes ol {
+    @apply list-decimal space-y-1 pl-6;
+  }
+  .prose-notes strong {
+    @apply font-semibold text-zinc-900 dark:text-zinc-100;
+  }
+  .prose-notes a {
+    @apply font-medium text-sky-700 underline underline-offset-2 hover:text-sky-600 dark:text-sky-400;
+  }
+  .prose-notes :not(pre) > code {
+    @apply rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-[0.85em] text-pink-700 dark:bg-zinc-800 dark:text-pink-300;
+  }
+}
